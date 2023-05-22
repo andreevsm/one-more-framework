@@ -1,0 +1,12 @@
+
+<div class="root">
+
+  <form [formGroup]="form" (ngSubmit)="onSubmitForm()">
+
+    <input formControlName="title" type="text">
+    <input formControlName="description" type="text">
+
+    <button type="submit">Добавить</button>
+  </form>
+
+</div>

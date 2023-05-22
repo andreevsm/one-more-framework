@@ -1,0 +1,20 @@
+<div class="root">
+
+  <ul>
+    <li *ngFor="let task of tasks">
+
+      <div>
+        {{task.title}}
+      </div>
+
+      <div>
+        {{task.description}}
+      </div>
+
+      <input (onChange)="updateTask.emit(task)" type="checkbox" name="isDone" [value]="task.isDone">
+
+      <button (click)="deleteTask.emit(task.id)">delete</button>
+    </li>
+  </ul>
+
+</div>

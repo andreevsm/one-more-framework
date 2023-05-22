@@ -1,0 +1,7 @@
+<div class="root">
+
+  <app-create-task (createTask)="onCreateTask($event)"></app-create-task>
+
+  <app-task-list [tasks]="(tasks$ | async)!" (updateTask)="onUpdateTask($event)" (deleteTask)="onDeleteTask($event)"></app-task-list>
+
+</div>
