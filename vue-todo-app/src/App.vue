@@ -1,47 +1,54 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+
+<script>
+
+  let id = 0;
+
+  export default {
+
+    data() {
+
+      return {
+        tasks: [],
+        newTask: {
+          title: '',
+          description: '',
+          isDone: false,
+        }
+      }
+    },
+
+    methods: {
+      onSubmit(e) {
+        e.preventDefault()
+        this.tasks = [{ ...this.newTask, createdAt: new Date(), id: ++id }, ...this.tasks];
+      },
+      onDeleteTask(id) {
+        this.tasks = this.tasks.filter(task => task.id !== id);
+      },
+      onUpdateTask(updatedTask) {
+        this.tasks = this.tasks.map(task => task.id === updatedTask.id ? { ...updatedTask } : task);
+      }
+    }
+  }
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+  <div>
+    <form @submit="onSubmit">
+      <input type="text" name="title" v-model="newTask.title" />
+      <input type="text" name="description" v-model="newTask.description" />
+      <button type="submit">Добавить</button>
+    </form>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+    <div>
+      <ul>
+        <li v-for="task in tasks" :key="task.id">
+          <div>{{task.title}}</div>
+          <div>{{task.description}}</div>
+          <input type="checkbox" name="isDone" v-bind:value="task.isDone" v-on:change="() => onUpdateTask({ ...task, isDone: !task.isDone })" />
+          <button v-on:click="() => onDeleteTask(task.id)">delete</button>
+        </li>
+      </ul>
     </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  </div>
 </template>
-
-<style scoped>
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
-</style>
