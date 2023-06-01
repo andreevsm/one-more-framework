@@ -1,0 +1,84 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+ul {
+  list-style-type: none;
+}
+
+input, button {
+  outline: none;
+}
+
+input {
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+button {
+  padding: 4px 8px;
+}
+
+.create-task {
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+}
+
+.input + .input {
+  margin-left: 8px;
+}
+
+.button {
+  margin-left: 8px;
+}
+
+.tasks-list {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.list {
+  padding: 24px;
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, .2), 0px 1px 1px 0px rgba(0, 0, 0, .14), 0px 1px 3px 0px rgba(0, 0, 0, .12);;
+}
+
+.list-item {
+  display: flex;
+  align-items: center;
+}
+
+.list-item + .list-item {
+  margin-top: 10px;
+}
+
+.item-col {
+  overflow: hidden;
+}
+
+.item-col + .item-col {
+  margin-left: 15px;
+}
+
+.item-col--title {
+  width: 200px;
+}
+
+.item-col--description {
+  text-overflow: ellipsis;
+  width: 50px;
+}
+
+.item-col--is-done {
+  width: 30px;
+}
+
+.item-col--delete {
+  width: 70px;
+}

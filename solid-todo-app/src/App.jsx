@@ -1,4 +1,4 @@
-import { createSignal } from "solid-js";
+import { Show, createSignal } from "solid-js";
 
 let id = 0;
 const DEFAULT_TASK = {
@@ -39,24 +39,28 @@ const App = () => {
 
   return (
     <div>
-      <form onSubmit={onSubmit}>
-        <input type="text" value={newTask().title} onInput={onAddNewTitle} />
-        <input type="text" value={newTask().description} onInput={onAddNewDescription} />
-        <button type="submit">Добавить</button>
-      </form>
+      <div class="create-task">
+        <form onSubmit={onSubmit}>
+          <input class="input" type="text" value={newTask().title} onInput={onAddNewTitle} />
+          <input class="input" type="text" value={newTask().description} onInput={onAddNewDescription} />
+          <button class="button" type="submit">Добавить</button>
+        </form>
+      </div>
 
 
-      <div>
-        <ul>
-        <For each={tasks()}>{(task, i) =>
-          <li>
-            <div>{task.title}</div>
-            <div>{task.description}</div>
-            <input type="checkbox" value={task.isDone} onChange={() => onUpdateTask({ ...task, isDone: !task.isDone })} />
-            <button onClick={() => onDeleteTask(task.id)}>delete</button>
-          </li>
-        }</For>
-        </ul>
+      <div class="tasks-list">
+        <Show when={tasks().length > 0}>
+          <ul class="list">
+            <For each={tasks()}>{(task, i) =>
+              <li class="list-item">
+                <div class="item-col item-col--title">{task.title}</div>
+                <div class="item-col item-col--description">{task.description}</div>
+                <input class="item-col item-col--is-done" type="checkbox" value={task.isDone} onChange={() => onUpdateTask({ ...task, isDone: !task.isDone })} />
+                <button class="item-col item-col--delete" onClick={() => onDeleteTask(task.id)}>Удалить</button>
+              </li>
+            }</For>
+          </ul>
+        </Show>
       </div>
     </div>
   )
