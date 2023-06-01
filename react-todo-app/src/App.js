@@ -34,34 +34,37 @@ const App = () => {
   return (
     <div>
 
-      <div>
+      <div className='create-task'>
         <form onSubmit={onSubmit}>
-          <input type="text" value={newTask.title} onInput={(e) => setNewTask({
+          <input className='input' type="text" value={newTask.title} onInput={(e) => setNewTask({
               ...newTask,
               title: e.target.value,
             })}
           />
-          <input type="text" value={newTask.description} onInput={(e) => setNewTask({
+          <input className='input' type="text" value={newTask.description} onInput={(e) => setNewTask({
               ...newTask,
               description: e.target.value,
             })}
           />
 
-          <button type="submit">Добавить</button>
+          <button className='button' type="submit">Добавить</button>
         </form>
       </div>
 
-      <div>
-        <ul>
-          {tasks.map(task => (
-            <li key={task.id}>
-              <div>{task.title}</div>
-              <div>{task.description}</div>
-              <input type="checkbox" name="isDone" value={task.isDone} onChange={() => onUpdateTask({ ...task, isDone: !task.isDone })} />
-              <button onClick={() => onDeleteTask(task.id)}>delete</button>
-            </li>
-          ))}
-        </ul>
+      <div className='tasks-list'>
+        {
+          tasks.length > 0 && (<ul className='list'>
+            {tasks.map(task => (
+              <li className='list-item' key={task.id}>
+                <div className='item-col item-col--title'>{task.title}</div>
+                <div className='item-col item-col--description'>{task.description}</div>
+                <input className='item-col item-col--is-done' type="checkbox" name="isDone" value={task.isDone} onChange={() => onUpdateTask({ ...task, isDone: !task.isDone })} />
+                <button className='item-col item-col--delete' onClick={() => onDeleteTask(task.id)}>Удалить</button>
+              </li>
+            ))}
+        </ul>)
+        }
+
       </div>
 
     </div>
